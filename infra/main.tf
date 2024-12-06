@@ -43,7 +43,7 @@ resource "google_cloudfunctions2_function" "default" {
 
   build_config {
     runtime     = "nodejs20"
-    entry_point = "helloHttp"
+    entry_point = "convertTemp"
     source {
       storage_source {
         bucket = google_storage_bucket.default.name
