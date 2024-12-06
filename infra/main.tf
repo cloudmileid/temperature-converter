@@ -18,11 +18,6 @@ resource "google_secret_manager_secret" "secret_name" {
   }
 }
 
-resource "google_service_account" "account" {
-  account_id = "gcf-sa-${random_id.default.hex}"
-  display_name = "Cloud function test service account"
-}
-
 resource "google_storage_bucket" "default" {
   name                        = "${random_id.default.hex}-gcf-source"
   location                    = "US"
@@ -61,8 +56,6 @@ resource "google_cloudfunctions2_function" "default" {
     max_instance_count = 1
     available_memory   = "256M"
     timeout_seconds    = 60
-
-    service_account_email = google_service_account.account.email
 
     environment_variables = {
         TEMP_CONVERT_TO = "ctof"
