@@ -64,9 +64,9 @@ resource "google_cloudfunctions2_function" "default" {
 
     service_account_email = google_service_account.account.email
 
-    # environment_variables = {
-    #     TEMP_CONVERT_TO = "ctof"
-    # }
+    environment_variables = {
+        TEMP_CONVERT_TO = "ctof"
+    }
 
     secret_environment_variables {
       key        = "TEST_SECRET"
