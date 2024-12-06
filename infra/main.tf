@@ -37,7 +37,7 @@ resource "google_storage_bucket_object" "object" {
 }
 
 resource "google_cloudfunctions2_function" "default" {
-  name        = "function-v2"
+  name        = "temperature-converter"
   location    = "us-central1"
   description = "Function to convert temperature"
 
