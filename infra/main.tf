@@ -18,11 +18,6 @@ resource "google_secret_manager_secret" "secret_name" {
   }
 }
 
-resource "google_service_account" "account" {
-  account_id = "${random_id.default.hex}-gcf-sa"
-  display_name = "Cloud function test service account"
-}
-
 resource "google_storage_bucket" "default" {
   name                        = "${random_id.default.hex}-gcf-source"
   location                    = "US"
@@ -42,13 +37,13 @@ resource "google_storage_bucket_object" "object" {
 }
 
 resource "google_cloudfunctions2_function" "default" {
-  name        = "function-v2"
+  name        = "temperature-converter"
   location    = "us-central1"
   description = "Function to convert temperature"
 
   build_config {
     runtime     = "nodejs20"
-    entry_point = "helloHttp"
+    entry_point = "convertTemp"
     source {
       storage_source {
         bucket = google_storage_bucket.default.name
@@ -62,18 +57,10 @@ resource "google_cloudfunctions2_function" "default" {
     available_memory   = "256M"
     timeout_seconds    = 60
 
-    service_account_email = google_service_account.account.email
-
-    # environment_variables = {
-    #     TEMP_CONVERT_TO = "ctof"
-    # }
-
-    secret_environment_variables {
-      key        = "TEST_SECRET"
-      project_id = local.project
-      secret     = google_secret_manager_secret.secret_name.secret_id
-      version    = "latest"
+    environment_variables = {
+        TEMP_CONVERT_TO = "ctof"
     }
+
   }
 }
 
