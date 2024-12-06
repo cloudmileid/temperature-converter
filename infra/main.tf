@@ -19,7 +19,7 @@ resource "google_secret_manager_secret" "secret_name" {
 }
 
 resource "google_service_account" "account" {
-  account_id = "${random_id.default.hex}-gcf-sa"
+  account_id = "gcf-sa-${random_id.default.hex}"
   display_name = "Cloud function test service account"
 }
 
