@@ -70,3 +70,5 @@ resource "google_cloud_run_service_iam_member" "member" {
   role     = "roles/run.invoker"
   member   = "allAuthenticatedUsers"
 }
+
+# deploy to gcp
