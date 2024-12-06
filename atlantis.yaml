@@ -1,0 +1,20 @@
+version: 3
+automerge: true
+projects:
+  - name: temperature-converter
+    dir: infra
+    autoplan:
+      when_modified: ["*.tf", "*.tfvars"]
+      enabled: true
+    apply_requirements: [mergeable, undiverged]
+    import_requirements: [mergeable, undiverged]
+    workflow: temperature-converter
+workflows:
+  temperature-converter:
+    plan:
+      steps:
+        - init
+        - plan
+    apply:
+      steps:
+        - apply
