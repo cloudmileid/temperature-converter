@@ -57,9 +57,9 @@ resource "google_cloudfunctions2_function" "default" {
     available_memory   = "256M"
     timeout_seconds    = 60
 
-    environment_variables = {
-        TEMP_CONVERT_TO = "ctof"
-    }
+    # environment_variables = {
+    #     TEMP_CONVERT_TO = "ctof"
+    # }
 
   }
 }
