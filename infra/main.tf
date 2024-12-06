@@ -61,12 +61,6 @@ resource "google_cloudfunctions2_function" "default" {
         TEMP_CONVERT_TO = "ctof"
     }
 
-    secret_environment_variables {
-      key        = "TEST_SECRET"
-      project_id = local.project
-      secret     = google_secret_manager_secret.secret_name.secret_id
-      version    = "latest"
-    }
   }
 }
 
